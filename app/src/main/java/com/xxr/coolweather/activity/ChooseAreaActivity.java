@@ -82,10 +82,10 @@ public class ChooseAreaActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        isFromWeatherActivity = getIntent().getBooleanExtra("from_weather_ activity", false);
-        SharedPreferences prefs = PreferenceManager. getDefaultSharedPreferences(this);
+        isFromWeatherActivity = getIntent().getBooleanExtra("from_weather_activity", false);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         // 已经选择了城市且不是从WeatherActivity跳转过来，才会直接跳转到WeatherActivity
-        if (prefs.getBoolean("city_selected", false)&& !isFromWeatherActivity) {
+        if (prefs.getBoolean("city_selected", false) && !isFromWeatherActivity) {
             Intent intent = new Intent(this, WeatherActivity.class);
             startActivity(intent);
             finish();
@@ -105,10 +105,10 @@ public class ChooseAreaActivity extends Activity {
                 if (currentLevel == LEVEL_PROVINCE) {
                     selectedProvince = provinceList.get(index);
                     queryCities();
-                }else if (currentLevel == LEVEL_CITY){
+                } else if (currentLevel == LEVEL_CITY) {
                     selectedCity = cityList.get(index);
                     queryCounties();
-                }else if (currentLevel == LEVEL_COUNTY) {
+                } else if (currentLevel == LEVEL_COUNTY) {
                     String countyCode = countyList.get(index).getCountyCode();
                     Intent intent = new Intent(ChooseAreaActivity.this, WeatherActivity.class);
                     intent.putExtra("county_code", countyCode);
@@ -271,9 +271,9 @@ public class ChooseAreaActivity extends Activity {
             queryProvinces();
         } else {
             if (isFromWeatherActivity) {
-            Intent intent = new Intent(this, WeatherActivity.class);
-            startActivity(intent);
-        }
+                Intent intent = new Intent(this, WeatherActivity.class);
+                startActivity(intent);
+            }
 
             finish();
         }

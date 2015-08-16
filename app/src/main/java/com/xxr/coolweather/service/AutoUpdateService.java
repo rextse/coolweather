@@ -9,6 +9,7 @@ import android.os.IBinder;
 import android.os.SystemClock;
 import android.preference.PreferenceManager;
 
+import com.xxr.coolweather.activity.WeatherActivity;
 import com.xxr.coolweather.util.HttpCallbackListener;
 import com.xxr.coolweather.util.HttpUtil;
 import com.xxr.coolweather.util.Utility;
@@ -32,8 +33,8 @@ public class AutoUpdateService extends Service {
             }
         }).start();
         AlarmManager manager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        int anhour = 8 * 60 * 60 * 1000;
-        long triggerAtTime = SystemClock.elapsedRealtime() + anhour;
+        int eighthour = 8*60*60*1000;
+        long triggerAtTime = SystemClock.elapsedRealtime() + eighthour;
         Intent i = new Intent(this, AutoUpdateService.class);
         PendingIntent pi = PendingIntent.getBroadcast(this, 0, i, 0);
         manager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, triggerAtTime, pi);
@@ -48,6 +49,7 @@ public class AutoUpdateService extends Service {
             @Override
             public void onFinish(final String response) {
                 Utility.handleWeatherResponse(AutoUpdateService.this, response);
+                WeatherActivity.weatherActivity.showWeather();
             }
 
 
